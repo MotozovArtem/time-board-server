@@ -107,7 +107,7 @@ CREATE TABLE project_test.user_role
 		CONSTRAINT "FK_project_test.user_role__project_test.project_user"
 			REFERENCES project_test.project_user
 			ON DELETE RESTRICT,
-	rol          VARCHAR(36) NOT NULL
+	role         VARCHAR(36) NOT NULL
 		CONSTRAINT "FK_project_test.user_role__project_test.role"
 			REFERENCES project_test.role
 			ON DELETE RESTRICT,
@@ -151,11 +151,11 @@ CREATE TABLE project_test.task
 			REFERENCES project_test.group_task
 			ON DELETE RESTRICT,
 	executor      VARCHAR(36)  NOT NULL
-		CONSTRAINT "FK_project_test.task__project_test.project_user"
+		CONSTRAINT "FK_project_test.task__project_test.project_user_executor"
 			REFERENCES project_test.project_user
 			ON DELETE RESTRICT,
 	reporter      VARCHAR(36)  NOT NULL
-		CONSTRAINT "FK_project_test.task__project_test.project_user"
+		CONSTRAINT "FK_project_test.task__project_test.project_user_reporter"
 			REFERENCES project_test.project_user
 			ON DELETE RESTRICT,
 	PRIMARY KEY (id)
