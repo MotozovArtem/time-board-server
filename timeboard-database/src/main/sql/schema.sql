@@ -25,13 +25,13 @@ CREATE TABLE accounts.account
 -- TODO: Чекнуть как работать со схемой и ограничениями по схеме
 CREATE TABLE accounts.project_schema
 (
-	id                     VARCHAR(36)  NOT NULL,
-	account                VARCHAR(36)  NOT NULL
+	id                        VARCHAR(36)  NOT NULL,
+	account                   VARCHAR(36)  NOT NULL
 		CONSTRAINT "FK_accounts.project_schema__accounts.account"
 			REFERENCES accounts.account
 			ON DELETE RESTRICT,
-	user_in_project_schema VARCHAR(36)  NULL,
-	project_schema         VARCHAR(100) NOT NULL,
+	user_in_project VARCHAR(36)  NULL,
+	project_schema            VARCHAR(100) NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -81,11 +81,11 @@ CREATE TABLE project_test.project_dashboard
 
 CREATE TABLE project_test.project_user
 (
-	id                 VARCHAR(36) NOT NULL,
-	schema_project_ref VARCHAR(36) NOT NULL,
-	joining_date       DATE        NOT NULL,
-	leaving_date       DATE        NULL,
-	project            VARCHAR(36) NOT NULL
+	id             VARCHAR(36) NOT NULL,
+	project_schema VARCHAR(36) NOT NULL,
+	joining_date   DATE        NOT NULL,
+	leaving_date   DATE        NULL,
+	project        VARCHAR(36) NOT NULL
 		CONSTRAINT "FK_project_test.project_user__project_test.project_dashboard"
 			REFERENCES project_test.project_dashboard
 			ON DELETE RESTRICT,
