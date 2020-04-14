@@ -30,7 +30,7 @@ CREATE TABLE accounts.project_schema
 		CONSTRAINT "FK_accounts.project_schema__accounts.account"
 			REFERENCES accounts.account
 			ON DELETE RESTRICT,
-	user_in_project_schema VARCHAR(36)  NOT NULL,
+	user_in_project_schema VARCHAR(36)  NULL,
 	project_schema         VARCHAR(100) NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -73,7 +73,7 @@ CREATE TABLE project_test.project_dashboard
 (
 	id            VARCHAR(36)  NOT NULL,
 	project_name  VARCHAR(256) NOT NULL,
-	project_coda  VARCHAR(10)  NOT NULL UNIQUE,
+	project_code  VARCHAR(10)  NOT NULL UNIQUE,
 	creation_date DATE         NOT NULL,
 	description   TEXT         NULL,
 	PRIMARY KEY (id)
