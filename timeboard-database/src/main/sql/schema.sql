@@ -201,9 +201,9 @@ CREATE TABLE project_test.task_attachment
 			ON DELETE SET NULL,
 	attachment_name VARCHAR(256) NOT NULL,
 	url             VARCHAR(256) NOT NULL,
-	CONSTRAINT "CS_task_and_comment_not_null" CHECK (
+	CONSTRAINT "CS_task_or_comment_not_null" CHECK (
 			task_attachment.task IS NOT NULL
-			AND task_attachment.comment IS NOT NULL
+			OR task_attachment.comment IS NOT NULL
 		),
 	PRIMARY KEY (id)
 );
