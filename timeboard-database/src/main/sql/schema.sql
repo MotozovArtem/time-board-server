@@ -184,6 +184,10 @@ CREATE TABLE project_test.comment
 		CONSTRAINT "FK_project_test.commit__project_test.project_user"
 			REFERENCES project_test.project_user
 			ON DELETE SET NULL,
+	task             VARCHAR(36) NOT NULL
+		CONSTRAINT "FK_project_test.commit__project_test.task"
+			REFERENCES project_test.task
+			ON DELETE SET NULL,
 	comment_text       TEXT        NOT NULL,
 	PRIMARY KEY (id)
 );
