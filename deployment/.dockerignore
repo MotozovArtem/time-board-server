@@ -1,0 +1,10 @@
+# Java output
+**/target/*
+
+# IntelliJ IDEA
+**/.idea/*
+*.iml
+
+# Visual Studio (Code)
+**/.vs/*
+**/.vscode/*

@@ -1,8 +1,19 @@
 version: '3.7'
 
 services:
+  app:
+    container_name: timeboard-app
+    image: rienelmot24/timeboard-server
+    ports:
+      - 8080:8080
+      - 8443:8443
+    environment:
+      - DB_ADDRESS = db
+    depends_on:
+      - db
+
   db:
     container_name: timeboard-db
-    build: ../timeboard-database
+    image: rienelmot24/timeboard-db
     ports:
       - 5432:5432
