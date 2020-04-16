@@ -7,7 +7,8 @@ RUN mkdir -p /code && \
 RUN wget http://download.bell-sw.com/java/11.0.6+10/bellsoft-jre11.0.6+10-linux-amd64.tar.gz && \
     tar -zxvf bellsoft-jre11.0.6+10-linux-amd64.tar.gz && \
     export JAVA_HOME=/jre-11.0.6 && \
-    export PATH=$PATH:$JAVA_HOME/bin
+    export PATH=$JAVA_HOME/bin:$PATH && \
+    echo $(java -version)
 
 COPY . /code
 
