@@ -23,6 +23,7 @@ FILES=(
 "/sql-data-init/TaskCommit.sql"
 "/sql-data-init/TaskObserver.sql"
 "/sql-data-init/TaskAttachment.sql"
+"/sql-data-init/CommentAttachment.sql"
 )
 
 echo "Starting loop";
