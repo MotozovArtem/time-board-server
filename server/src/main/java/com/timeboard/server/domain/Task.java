@@ -4,10 +4,13 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "Task")
+@Entity(name = "ProjectTask")
 @Table(name = "task")
 public class Task {
 
@@ -21,34 +24,49 @@ public class Task {
 	@Column(name = "full_code", unique = true, nullable = false)
 	private String fullCode;
 
-	@Column(name = "creation_date", unique = true, nullable = false)
+	@Column(name = "creation_date", nullable = false)
 	private ZonedDateTime creationDate;
 
-	@Column(name = "done_date", unique = true, nullable = false)
+	@Column(name = "done_date")
 	private ZonedDateTime doneDate;
 
-	@Column(name = "last_modified_date", unique = true, nullable = false)
-	private ZonedDateTime lastModifiedDate;
+	@Column(name = "last_modified", nullable = false)
+	private ZonedDateTime lastModified;
 
-	@Column(name = "description", unique = true, nullable = false)
+	@Column(name = "description", nullable = false)
 	private String description;
 
-	@Column(name = "name", unique = true, nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "project", unique = true, nullable = false)
+	@ManyToOne(targetEntity = ProjectDashboard.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "project", nullable = false)
 	private ProjectDashboard project;
 
-	@Column(name = "step", unique = true, nullable = false)
+	@ManyToOne(targetEntity = Step.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "step", nullable = false)
 	private Step step;
 
-	@Column(name = "group_task", unique = true, nullable = false)
+	@ManyToOne(targetEntity = GroupTask.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "group_task")
 	private GroupTask groupTask;
 
-	@Column(name = "executor", unique = true, nullable = false)
+	@ManyToOne(targetEntity = ProjectUser.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "executor")
 	private ProjectUser executor;
 
-	@Column(name = "reporter", unique = true, nullable = false)
+	@ManyToOne(targetEntity = ProjectUser.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "reporter", nullable = false)
 	private ProjectUser reporter;
 
 	public Task() {
@@ -94,12 +112,12 @@ public class Task {
 		this.doneDate = doneDate;
 	}
 
-	public ZonedDateTime getLastModifiedDate() {
-		return lastModifiedDate;
+	public ZonedDateTime getLastModified() {
+		return lastModified;
 	}
 
-	public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
+	public void setLastModified(ZonedDateTime lastModified) {
+		this.lastModified = lastModified;
 	}
 
 	public String getDescription() {

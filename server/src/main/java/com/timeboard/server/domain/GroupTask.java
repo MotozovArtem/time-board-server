@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "GroupTask")
+@Entity(name = "ProjectGroupTask")
 @Table(name = "group_task")
 public class GroupTask {
 

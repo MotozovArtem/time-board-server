@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "CommentAttachment")
+@Entity(name = "ProjectCommentAttachment")
 @Table(name = "comment_attachment")
 public class CommentAttachment {
 

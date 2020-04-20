@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "TaskCommit")
+@Entity(name = "ProjectTaskCommit")
 @Table(name = "task_commit")
 public class TaskCommit {
 

@@ -132,7 +132,7 @@ CREATE TABLE project_test.task
 (
 	id            VARCHAR(36)  NOT NULL,
 	number        INTEGER      NOT NULL,
-	full_coda     VARCHAR(50)  NOT NULL UNIQUE,
+	full_code     VARCHAR(50)  NOT NULL UNIQUE,
 	creation_date DATE         NOT NULL,
 	done_date     DATE         NULL,
 	last_modified DATE         NOT NULL,

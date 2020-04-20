@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "TaskAttachment")
+@Entity(name = "ProjectTaskAttachment")
 @Table(name = "task_attachment")
 public class TaskAttachment {
 

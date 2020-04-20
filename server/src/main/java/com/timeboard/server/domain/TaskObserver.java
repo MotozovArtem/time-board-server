@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "TaskObserver")
+@Entity(name = "ProjectTaskObserver")
 @Table(name = "task_observer")
 public class TaskObserver {
 

@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity(name = "UserRole")
+@Entity(name = "ProjectUserRole")
 @Table(name = "user_role")
 public class UserRole {
 

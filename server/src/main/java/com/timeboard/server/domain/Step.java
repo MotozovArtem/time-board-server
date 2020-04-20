@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "Step")
+@Entity(name = "ProjectStep")
 @Table(name = "step")
 public class Step {
 

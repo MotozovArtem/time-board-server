@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "Role")
+@Entity(name = "ProjectRole")
 @Table(name = "role")
 public class Role {
 
