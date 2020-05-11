@@ -16,6 +16,7 @@ CREATE TABLE account
 	second_name   VARCHAR(256) NOT NULL,
 	creation_date DATE         NOT NULL,
 	version       INTEGER      NOT NULL DEFAULT 0,
+	icon_url      TEXT         NULL,
 	PRIMARY KEY (id)
 );
 

@@ -36,6 +36,9 @@ public class Account {
 	@Column(name = "creation_date", nullable = false)
 	private ZonedDateTime creationDate;
 
+	@Column(name = "icon_url")
+	private String iconUrl;
+
 	@Column(name = "version", nullable = false)
 	private Long version;
 
@@ -96,6 +99,14 @@ public class Account {
 
 	public void setCreationDate(ZonedDateTime creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
 	}
 
 	public Long getVersion() {
