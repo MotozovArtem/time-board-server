@@ -41,6 +41,12 @@ CREATE TABLE role
 	PRIMARY KEY (id)
 );
 
+INSERT INTO role(id, name, access_level)
+VALUES (uuid_generate_v4(), 'Admin', 100),
+	   (uuid_generate_v4(), 'Moderator', 90),
+	   (uuid_generate_v4(), 'Viewer', 80),
+	   (uuid_generate_v4(), 'Guest', 0);
+
 CREATE TABLE user_role
 (
 	id           VARCHAR(36) NOT NULL,
@@ -63,6 +69,11 @@ CREATE TABLE step
 	version INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
+
+INSERT INTO step(id, name)
+VALUES (uuid_generate_v4(), 'TO DO'),
+	   (uuid_generate_v4(), 'IN PROGRESS'),
+	   (uuid_generate_v4(), 'DONE');
 
 CREATE TABLE group_task
 (
