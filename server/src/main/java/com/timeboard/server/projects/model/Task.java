@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectTask")
 @Table(name = "task", schema = "public")
@@ -71,6 +72,7 @@ public class Task {
 	@JoinColumn(name = "reporter", nullable = false)
 	private ProjectUser reporter;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

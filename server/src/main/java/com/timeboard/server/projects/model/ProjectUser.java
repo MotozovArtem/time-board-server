@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.timeboard.server.accounts.model.ProjectSchema;
 
@@ -50,6 +51,7 @@ public class ProjectUser {
 	)
 	private List<Role> roles;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

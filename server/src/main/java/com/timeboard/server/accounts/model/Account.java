@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 
 @Entity(name = "Account")
@@ -39,6 +40,7 @@ public class Account {
 	@Column(name = "icon_url")
 	private String iconUrl;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

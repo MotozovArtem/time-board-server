@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "Task")
 @Table(name = "task", schema = "public")
@@ -46,6 +47,7 @@ public class Task {
 	@JoinColumn(name = "account", nullable = false)
 	private Account account;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectRole")
 @Table(name = "role", schema = "public")
@@ -28,6 +29,7 @@ public class Role {
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<ProjectUser> users;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

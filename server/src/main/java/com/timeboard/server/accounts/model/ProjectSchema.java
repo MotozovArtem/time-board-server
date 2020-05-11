@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import com.timeboard.server.projects.model.ProjectUser;
 
@@ -37,6 +38,7 @@ public class ProjectSchema {
 	@Column(name = "project_schema", nullable = false)
 	private String projectSchema;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

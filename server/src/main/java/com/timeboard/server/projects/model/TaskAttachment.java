@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectTaskAttachment")
 @Table(name = "task_attachment", schema = "public")
@@ -29,6 +30,7 @@ public class TaskAttachment {
 	@Column(name = "url", unique = true, nullable = false)
 	private String url;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

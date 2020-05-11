@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectTaskCommit")
 @Table(name = "task_commit", schema = "public")
@@ -27,6 +28,7 @@ public class TaskCommit {
 	@JoinColumn(name = "commit", nullable = false)
 	private Commit commit;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectTaskObserver")
 @Table(name = "task_observer", schema = "public")
@@ -27,6 +28,7 @@ public class TaskObserver {
 	@JoinColumn(name = "observer", unique = true, nullable = false)
 	private ProjectUser observer;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectStep")
 @Table(name = "step", schema = "public")
@@ -19,6 +20,7 @@ public class Step {
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 

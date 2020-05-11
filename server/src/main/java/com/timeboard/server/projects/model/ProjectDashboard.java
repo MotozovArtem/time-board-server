@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "ProjectDashboard")
 @Table(name = "project_dashboard", schema = "public")
@@ -37,6 +38,7 @@ public class ProjectDashboard {
 	@JoinColumn(name = "project")
 	private List<ProjectUser> users;
 
+	@Version
 	@Column(name = "version", nullable = false)
 	private Long version;
 
