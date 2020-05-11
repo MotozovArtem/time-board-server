@@ -1,7 +1,8 @@
 CREATE TABLE group_task
 (
-	id   VARCHAR(36)  NOT NULL,
-	name VARCHAR(100) NOT NULL,
+	id      VARCHAR(36)  NOT NULL,
+	name    VARCHAR(100) NOT NULL,
+	version INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -14,6 +15,7 @@ CREATE TABLE account
 	first_name    VARCHAR(256) NOT NULL,
 	second_name   VARCHAR(256) NOT NULL,
 	creation_date DATE         NOT NULL,
+	version       INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -31,6 +33,7 @@ CREATE TABLE project_schema
 			ON DELETE RESTRICT,
 	user_in_project VARCHAR(36)  NULL,
 	project_schema  VARCHAR(100) NOT NULL,
+	version         INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -54,6 +57,7 @@ CREATE TABLE task
 		CONSTRAINT "FK_task__account"
 			REFERENCES account
 			ON DELETE RESTRICT,
+	version       INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -66,5 +70,6 @@ CREATE TABLE task_attachment
 		CONSTRAINT "FK_task_attachment__task"
 			REFERENCES task
 			ON DELETE RESTRICT,
+	version         INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );

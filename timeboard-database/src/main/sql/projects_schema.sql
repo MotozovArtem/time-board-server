@@ -5,6 +5,7 @@ CREATE TABLE project_dashboard
 	project_code  VARCHAR(10)  NOT NULL UNIQUE,
 	creation_date DATE         NOT NULL,
 	description   TEXT         NULL,
+	version       INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -21,6 +22,7 @@ CREATE TABLE project_user
 		CONSTRAINT "FK_project_user__project_dashboard"
 			REFERENCES project_dashboard
 			ON DELETE RESTRICT,
+	version        INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -35,6 +37,7 @@ CREATE TABLE role
 	id           VARCHAR(36)  NOT NULL,
 	name         VARCHAR(100) NOT NULL UNIQUE,
 	access_level INTEGER      NOT NULL UNIQUE,
+	version      INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -49,20 +52,23 @@ CREATE TABLE user_role
 		CONSTRAINT "FK_user_role__role"
 			REFERENCES role
 			ON DELETE RESTRICT,
+	version      INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE step
 (
-	id   VARCHAR(36) NOT NULL,
-	name VARCHAR(50) NOT NULL,
+	id      VARCHAR(36) NOT NULL,
+	name    VARCHAR(50) NOT NULL,
+	version INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE group_task
 (
-	id   VARCHAR(36) NOT NULL,
-	name VARCHAR(50) NOT NULL,
+	id      VARCHAR(36) NOT NULL,
+	name    VARCHAR(50) NOT NULL,
+	version INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -96,6 +102,7 @@ CREATE TABLE task
 		CONSTRAINT "FK_task__project_user_reporter"
 			REFERENCES project_user
 			ON DELETE RESTRICT,
+	version       INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -110,6 +117,7 @@ CREATE TABLE task_observer
 		CONSTRAINT "FK_task_observer__project_user"
 			REFERENCES project_user
 			ON DELETE RESTRICT,
+	version  INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -127,6 +135,7 @@ CREATE TABLE comment
 			REFERENCES task
 			ON DELETE SET NULL,
 	comment_text       TEXT        NOT NULL,
+	version            INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -139,6 +148,7 @@ CREATE TABLE task_attachment
 			ON DELETE RESTRICT,
 	attachment_name VARCHAR(256) NOT NULL,
 	url             VARCHAR(256) NOT NULL,
+	version         INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -151,6 +161,7 @@ CREATE TABLE comment_attachment
 			ON DELETE SET NULL,
 	attachment_name VARCHAR(256) NOT NULL,
 	url             VARCHAR(256) NOT NULL,
+	version         INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
@@ -165,19 +176,21 @@ CREATE TABLE commit
 		CONSTRAINT "FK_commit__project_user"
 			REFERENCES project_user
 			ON DELETE SET NULL,
+	version  INTEGER      NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE task_commit
 (
-	id     VARCHAR(36) NOT NULL,
-	task   VARCHAR(36) NULL
+	id      VARCHAR(36) NOT NULL,
+	task    VARCHAR(36) NULL
 		CONSTRAINT "FK_task_commit__task"
 			REFERENCES task
 			ON DELETE RESTRICT,
-	commit VARCHAR(36) NULL
+	commit  VARCHAR(36) NULL
 		CONSTRAINT "FK_task_commit__commit"
 			REFERENCES commit
 			ON DELETE SET NULL,
+	version INTEGER     NOT NULL DEFAULT 0,
 	PRIMARY KEY (id)
 );
