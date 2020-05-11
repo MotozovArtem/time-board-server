@@ -11,12 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "ProjectTaskCommit")
 @Table(name = "task_commit", schema = "public")
 public class TaskCommit {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 

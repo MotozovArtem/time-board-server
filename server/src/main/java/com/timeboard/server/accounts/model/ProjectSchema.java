@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 import com.timeboard.server.projects.model.ProjectUser;
 
 @Entity(name = "ProjectSchema")
@@ -20,6 +22,7 @@ public class ProjectSchema {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 

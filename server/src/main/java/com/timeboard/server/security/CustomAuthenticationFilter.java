@@ -3,7 +3,6 @@ package com.timeboard.server.security;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -12,8 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.timeboard.server.util.ThreadLocalStorage;
 
 
-public class CustomAuthenticationFilter
-		extends UsernamePasswordAuthenticationFilter {
+public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	public static final String SPRING_SECURITY_FORM_TENANT_NAME_KEY = "tenant";
 

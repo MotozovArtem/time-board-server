@@ -8,12 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "GroupTask")
 @Table(name = "group_task", schema = "public")
 public class GroupTask {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 

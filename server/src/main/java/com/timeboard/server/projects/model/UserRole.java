@@ -11,12 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "ProjectUserRole")
 @Table(name = "user_role", schema = "public")
 public class UserRole {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 

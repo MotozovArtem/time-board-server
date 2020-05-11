@@ -8,12 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 @Entity(name = "ProjectStep")
 @Table(name = "step", schema = "public")
 public class Step {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 

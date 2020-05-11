@@ -160,7 +160,7 @@ public class AccountsDatabaseConfig {
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.put(org.hibernate.cfg.Environment.DIALECT,
-				"org.hibernate.dialect.PostgreSQLDialect");
+				"org.hibernate.dialect.PostgresPlusDialect");
 		properties.put(org.hibernate.cfg.Environment.SHOW_SQL, true);
 		properties.put(org.hibernate.cfg.Environment.FORMAT_SQL, true);
 		properties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "none");

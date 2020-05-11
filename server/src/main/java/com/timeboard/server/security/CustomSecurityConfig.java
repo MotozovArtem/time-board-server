@@ -30,13 +30,15 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//@formatter:off
 		http
-				.addFilterBefore(authenticationFilter(),
-						UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers("/css/**", "/index").permitAll()
+				.antMatchers("/**").permitAll()
 				.antMatchers("/user/**").authenticated()
 				.and()
-				.formLogin().loginPage("/login")
+				.csrf()
+				.disable()
+				.formLogin()
+				.loginPage("/login")
 				.and()
 				.logout()
 				.logoutUrl("/logout");

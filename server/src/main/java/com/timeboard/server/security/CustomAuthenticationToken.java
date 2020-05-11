@@ -6,8 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 
 
-public class CustomAuthenticationToken
-		extends UsernamePasswordAuthenticationToken {
+public class CustomAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
 
