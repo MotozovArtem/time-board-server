@@ -27,6 +27,9 @@ public class TaskObserver {
 	@JoinColumn(name = "observer", unique = true, nullable = false)
 	private ProjectUser observer;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public TaskObserver() {
 	}
 
@@ -52,5 +55,13 @@ public class TaskObserver {
 
 	public void setObserver(ProjectUser observer) {
 		this.observer = observer;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

@@ -27,6 +27,9 @@ public class TaskCommit {
 	@JoinColumn(name = "commit", nullable = false)
 	private Commit commit;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public TaskCommit() {
 	}
 
@@ -52,5 +55,13 @@ public class TaskCommit {
 
 	public void setCommit(Commit commit) {
 		this.commit = commit;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

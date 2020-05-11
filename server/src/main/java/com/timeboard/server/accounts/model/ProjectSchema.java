@@ -37,6 +37,9 @@ public class ProjectSchema {
 	@Column(name = "project_schema", nullable = false)
 	private String projectSchema;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public ProjectSchema() {
 	}
 
@@ -70,5 +73,13 @@ public class ProjectSchema {
 
 	public void setProjectSchema(String projectSchema) {
 		this.projectSchema = projectSchema;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

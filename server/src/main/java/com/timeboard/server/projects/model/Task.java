@@ -71,6 +71,9 @@ public class Task {
 	@JoinColumn(name = "reporter", nullable = false)
 	private ProjectUser reporter;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Task() {
 	}
 
@@ -176,5 +179,13 @@ public class Task {
 
 	public void setReporter(ProjectUser reporter) {
 		this.reporter = reporter;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

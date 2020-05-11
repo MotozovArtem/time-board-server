@@ -36,6 +36,9 @@ public class Commit {
 	@JoinColumn(name = "author", nullable = false)
 	private ProjectUser author;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Commit() {
 	}
 
@@ -85,5 +88,13 @@ public class Commit {
 
 	public void setAuthor(ProjectUser author) {
 		this.author = author;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

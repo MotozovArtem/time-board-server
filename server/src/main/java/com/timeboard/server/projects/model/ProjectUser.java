@@ -50,6 +50,9 @@ public class ProjectUser {
 	)
 	private List<Role> roles;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public ProjectUser() {
 	}
 
@@ -99,5 +102,13 @@ public class ProjectUser {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

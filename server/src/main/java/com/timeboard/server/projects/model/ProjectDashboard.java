@@ -37,6 +37,9 @@ public class ProjectDashboard {
 	@JoinColumn(name = "project")
 	private List<ProjectUser> users;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public ProjectDashboard() {
 	}
 
@@ -78,5 +81,13 @@ public class ProjectDashboard {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<ProjectUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<ProjectUser> users) {
+		this.users = users;
 	}
 }

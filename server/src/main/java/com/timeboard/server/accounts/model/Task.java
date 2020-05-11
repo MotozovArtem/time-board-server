@@ -46,6 +46,9 @@ public class Task {
 	@JoinColumn(name = "account", nullable = false)
 	private Account account;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Task() {
 	}
 
@@ -111,5 +114,13 @@ public class Task {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

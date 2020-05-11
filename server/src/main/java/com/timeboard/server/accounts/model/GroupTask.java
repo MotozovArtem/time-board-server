@@ -19,6 +19,9 @@ public class GroupTask {
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public GroupTask() {
 	}
 
@@ -36,5 +39,13 @@ public class GroupTask {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

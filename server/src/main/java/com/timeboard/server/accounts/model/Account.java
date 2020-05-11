@@ -36,6 +36,9 @@ public class Account {
 	@Column(name = "creation_date", nullable = false)
 	private ZonedDateTime creationDate;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Account() {
 	}
 
@@ -93,5 +96,13 @@ public class Account {
 
 	public void setCreationDate(ZonedDateTime creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

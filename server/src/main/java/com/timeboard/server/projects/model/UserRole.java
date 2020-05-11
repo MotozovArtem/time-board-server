@@ -31,6 +31,9 @@ public class UserRole {
 	@JoinColumn(name = "role", unique = true, nullable = false)
 	private Role role;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public UserRole() {
 	}
 
@@ -56,5 +59,13 @@ public class UserRole {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

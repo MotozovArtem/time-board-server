@@ -28,6 +28,9 @@ public class Role {
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<ProjectUser> users;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Role() {
 	}
 
@@ -53,5 +56,13 @@ public class Role {
 
 	public void setAccessLevel(Integer accessLevel) {
 		this.accessLevel = accessLevel;
+	}
+
+	public Set<ProjectUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<ProjectUser> users) {
+		this.users = users;
 	}
 }

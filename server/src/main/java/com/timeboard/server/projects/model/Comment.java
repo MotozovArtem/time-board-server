@@ -39,6 +39,9 @@ public class Comment {
 	@JoinColumn(name = "task", nullable = false)
 	private Task task;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public Comment() {
 	}
 
@@ -88,5 +91,13 @@ public class Comment {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

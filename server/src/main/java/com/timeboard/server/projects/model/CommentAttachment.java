@@ -31,6 +31,9 @@ public class CommentAttachment {
 	@Column(name = "url", unique = true, nullable = false)
 	private String url;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public CommentAttachment() {
 	}
 
@@ -64,6 +67,14 @@ public class CommentAttachment {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }
 

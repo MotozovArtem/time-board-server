@@ -31,6 +31,9 @@ public class TaskAttachment {
 	@JoinColumn(name = "task", nullable = false, referencedColumnName = "id")
 	private Task task;
 
+	@Column(name = "version", nullable = false)
+	private Long version;
+
 	public TaskAttachment() {
 	}
 
@@ -64,5 +67,13 @@ public class TaskAttachment {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 }

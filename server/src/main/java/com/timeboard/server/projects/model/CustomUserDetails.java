@@ -3,9 +3,10 @@ package com.timeboard.server.projects.model;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 public class CustomUserDetails
-		extends org.springframework.security.core.userdetails.User {
+		extends User {
 
 	private static final long serialVersionUID = 1L;
 
