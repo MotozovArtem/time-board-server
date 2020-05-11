@@ -21,7 +21,7 @@ multitenancy:
   app:
     accounts:
       datasource:
-        url: jdbc:postgresql://192.168.99.100:5432/accounts
+        url: jdbc:postgresql://${DB_ADDRESS}:5432/accounts
         username: admin
         password: admin
         driverClassName: org.postgresql.Driver
