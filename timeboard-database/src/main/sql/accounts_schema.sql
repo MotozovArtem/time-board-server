@@ -67,7 +67,7 @@ CREATE TABLE task_attachment
 	id              VARCHAR(36)  NOT NULL,
 	attachment_name VARCHAR(256) NOT NULL,
 	url             VARCHAR(256) NOT NULL,
-	task            VARCHAR(36)
+	task            VARCHAR(36)  NOT NULL
 		CONSTRAINT "FK_task_attachment__task"
 			REFERENCES task
 			ON DELETE RESTRICT,
