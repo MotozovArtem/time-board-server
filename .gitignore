@@ -1,0 +1,11 @@
+# IntelliJ IDEA 
+**/.idea/*
+**/target/*
+*.iml
+
+# Maven
+**/.mvn/*
+
+# Visual Studio (code)
+**/.vs/*
+**/.vscode/*
