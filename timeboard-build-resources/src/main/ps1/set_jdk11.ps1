@@ -1,0 +1,1 @@
+$env:JAVA_HOME="C:\Program Files\BellSoft\LibericaJDK-11-Full\"

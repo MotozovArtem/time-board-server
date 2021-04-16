@@ -1,11 +1,35 @@
-# IntelliJ IDEA 
-**/.idea/*
-**/target/*
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
+*.ipr
 
-# Maven
-**/.mvn/*
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
 
-# Visual Studio (code)
-**/.vs/*
-**/.vscode/*
+### VS Code ###
+.vs/
+.vscode/
+.mvn/
+
+# Node.js, Vue.js
+build/
+dist/
+out/

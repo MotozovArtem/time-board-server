@@ -2,31 +2,25 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: TimeBoard
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    placeholder-prefix: $${
+    locations: 'classpath:db/migration/common'
   jpa:
     database: postgresql
     show-sql: true
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   datasource:
-    hikari:
-      connection-timeout: 20000
-      maximum-pool-size: 5
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/timeboard
+    username: timeboard
+    password: timeboard_password
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     serialization:
       write-dates-as-timestamps: false
-
-multitenancy:
-  app:
-    accounts:
-      datasource:
-        url: jdbc:postgresql://${DB_ADDRESS}:5432/accounts
-        username: admin
-        password: admin
-        driverClassName: org.postgresql.Driver
-        connectionTimeout: 20000
-        maxPoolSize: 10
-        idleTimeout: 300000
-        minIdle: 10
-        poolName: accounts-connection-pool
