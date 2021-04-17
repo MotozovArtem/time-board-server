@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: TimeBoard
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: 'classpath:templates/'
+    suffix: '.html'
   flyway:
     enabled: true
     baseline-on-migrate: true

@@ -1,4 +1,4 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

@@ -39,6 +39,16 @@ CREATE TABLE timeboard_user (
     CONSTRAINT timeboard_user_login_ukey UNIQUE (login)
     );
 
+CREATE TABLE timeboard_personal_group_task (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_personal_group_task_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_personal_group_task_name_ukey UNIQUE (name)
+    );
+
 CREATE TABLE timeboard_personal_task (
     id VARCHAR(255) NOT NULL,
     creation_time TIMESTAMP NOT NULL,
@@ -48,11 +58,13 @@ CREATE TABLE timeboard_personal_task (
     done_date TIMESTAMP NULL,
     done BOOL NOT NULL,
     "name" VARCHAR(255) NOT NULL,
-    group_task_id VARCHAR(255) NULL,
+    personal_group_task_id VARCHAR(255) NULL,
     user_id VARCHAR(255) NOT NULL,
     CONSTRAINT timeboard_personal_task_pkey PRIMARY KEY (id),
-    CONSTRAINT timeboard_personal_task_group_task_id_fkey FOREIGN KEY (group_task_id) REFERENCES timeboard_group_task (id),
-    CONSTRAINT timeboard_personal_task_user_id_fkey FOREIGN KEY (user_id) REFERENCES timeboard_user (id)
+    CONSTRAINT timeboard_personal_task_personal_group_task_id_fkey
+        FOREIGN KEY (personal_group_task_id) REFERENCES timeboard_personal_group_task (id),
+    CONSTRAINT timeboard_personal_task_user_id_fkey
+        FOREIGN KEY (user_id) REFERENCES timeboard_user (id)
     );
 
 CREATE TABLE timeboard_personal_task_attachment (
@@ -159,7 +171,7 @@ CREATE TABLE timeboard_task_observer (
     observer_id VARCHAR(255) NOT NULL,
     task_id VARCHAR(255) NOT NULL,
     CONSTRAINT timeboard_task_observer_pkey PRIMARY KEY (id),
-    CONSTRAINT timeboard_task_observer_observer_id_ukey UNIQUE (observer_id),
+    CONSTRAINT timeboard_task_observer_task_id_observer_id_ukey UNIQUE (task_id, observer_id),
     CONSTRAINT timeboard_task_observer_observer_id_fkey FOREIGN KEY (observer_id) REFERENCES timeboard_project_user (id),
     CONSTRAINT timeboard_task_observer_task_id_fkey FOREIGN KEY (task_id) REFERENCES timeboard_task (id)
     );

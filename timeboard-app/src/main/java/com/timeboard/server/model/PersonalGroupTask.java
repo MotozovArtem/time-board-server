@@ -1,4 +1,4 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,14 +7,14 @@ import javax.persistence.Table;
 /**
  * todo motozov.
  */
-@Entity(name = "GroupTask")
-@Table(name = GroupTask.TABLE_NAME)
-public class GroupTask extends DomainEntity {
+@Entity(name = "PersonalGroupTask")
+@Table(name = PersonalGroupTask.TABLE_NAME)
+public class PersonalGroupTask extends DomainEntity {
 
 	/**
 	 * todo motozov.
 	 */
-	public static final String TABLE_NAME = "timeboard_group_task";
+	public static final String TABLE_NAME = "timeboard_personal_group_task";
 
 	/**
 	 * todo motozov.
@@ -23,19 +23,19 @@ public class GroupTask extends DomainEntity {
 		/**
 		 * todo motozov.
 		 */
-		public static final String GT_CN_NAME = "name";
+		public static final String PGT_CN_NAME = "name";
 	}
 
 	/**
 	 * todo motozov.
 	 */
-	@Column(name = ColumnName.GT_CN_NAME, unique = true, nullable = false)
+	@Column(name = ColumnName.PGT_CN_NAME, unique = true, nullable = false)
 	private String name;
 
 	/**
 	 * Constructor.
 	 */
-	public GroupTask() {
+	public PersonalGroupTask() {
 	}
 
 	public String getName() {

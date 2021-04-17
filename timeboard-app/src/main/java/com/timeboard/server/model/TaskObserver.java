@@ -1,22 +1,35 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * todo motozov.
  */
 @Entity(name = "ProjectTaskObserver")
-@Table(name = TaskObserver.TABLE_NAME)
+@Table(name = TaskObserver.TABLE_NAME, uniqueConstraints = {
+		@UniqueConstraint(name = TaskObserver.UniqueConstraintsName.TO_UCN_TASK_OBSERVER_UKEY,
+				columnNames = {TaskObserver.ColumnName.TO_CN_TASK_ID, TaskObserver.ColumnName.TO_CN_OBSERVER_ID})})
 public class TaskObserver extends DomainEntity {
 
 	/**
 	 * todo motozov.
 	 */
 	public static final String TABLE_NAME = "timeboard_task_observer";
+
+	/**
+	 * todo motozov
+	 */
+	public static class UniqueConstraintsName {
+		/**
+		 * todo motozov
+		 */
+		public static final String TO_UCN_TASK_OBSERVER_UKEY = "timeboard_task_observer_task_id_observer_id_ukey";
+	}
 
 	/**
 	 * todo motozov.
@@ -45,7 +58,7 @@ public class TaskObserver extends DomainEntity {
 	 * todo motozov.
 	 */
 	@ManyToOne(targetEntity = ProjectUser.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = ColumnName.TO_CN_OBSERVER_ID, unique = true, nullable = false)
+	@JoinColumn(name = ColumnName.TO_CN_OBSERVER_ID, nullable = false)
 	private ProjectUser observer;
 
 	/**

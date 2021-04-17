@@ -1,10 +1,10 @@
 package com.timeboard.test.server.config;
 
+import com.timeboard.server.config.TimeboardConfig;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-//import com.timeboard.server.config.TimeboardConfig;
 
 /**
  * Test configuration
@@ -14,8 +14,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @EnableAutoConfiguration
-// fixme: Fix copy sources
-//@Import({TimeboardConfig.class})
+@Import({TimeboardConfig.class})
 @EnableConfigurationProperties
 public class TestApplicationConfig {
 }

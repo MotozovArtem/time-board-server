@@ -1,4 +1,4 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import java.time.ZonedDateTime;
 import javax.persistence.Column;
@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 /**
  * todo motozov.
+ * TODO: Do it with descriptor and extends GroupTask (for all projects)
  */
 @Entity(name = "Task")
 @Table(name = PersonalTask.TABLE_NAME)
@@ -47,7 +48,7 @@ public class PersonalTask extends DomainEntity {
 		/**
 		 * todo motozov.
 		 */
-		public static final String PT_CN_GROUP_TASK_ID = "group_task_id";
+		public static final String PT_CN_PERSONAL_GROUP_TASK_ID = "personal_group_task_id";
 
 		/**
 		 * todo motozov.
@@ -81,10 +82,10 @@ public class PersonalTask extends DomainEntity {
 	/**
 	 * todo motozov.
 	 */
-	@ManyToOne(targetEntity = GroupTask.class,
+	@ManyToOne(targetEntity = PersonalGroupTask.class,
 			fetch = FetchType.LAZY)
-	@JoinColumn(name = ColumnName.PT_CN_GROUP_TASK_ID, referencedColumnName = "id")
-	private GroupTask groupTask;
+	@JoinColumn(name = ColumnName.PT_CN_PERSONAL_GROUP_TASK_ID, referencedColumnName = "id")
+	private PersonalGroupTask groupTask;
 
 	/**
 	 * todo motozov.
@@ -133,11 +134,11 @@ public class PersonalTask extends DomainEntity {
 		this.name = name;
 	}
 
-	public GroupTask getGroupTask() {
+	public PersonalGroupTask getGroupTask() {
 		return groupTask;
 	}
 
-	public void setGroupTask(GroupTask groupTask) {
+	public void setGroupTask(PersonalGroupTask groupTask) {
 		this.groupTask = groupTask;
 	}
 

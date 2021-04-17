@@ -1,4 +1,4 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;

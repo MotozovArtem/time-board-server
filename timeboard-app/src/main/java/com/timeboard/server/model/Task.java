@@ -1,4 +1,4 @@
-package com.timeboard.server.domain;
+package com.timeboard.server.model;
 
 import java.time.ZonedDateTime;
 import javax.persistence.Column;

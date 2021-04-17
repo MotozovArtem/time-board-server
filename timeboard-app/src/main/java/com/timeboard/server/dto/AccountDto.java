@@ -1,4 +1,4 @@
-package com.timeboard.server.domain.accounts.dto;
+package com.timeboard.server.dto;
 
 import java.util.UUID;
 
