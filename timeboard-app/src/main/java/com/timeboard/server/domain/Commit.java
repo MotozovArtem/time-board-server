@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectCommit")
 @Table(name = Commit.TABLE_NAME)
 public class Commit extends DomainEntity {
@@ -17,22 +20,71 @@ public class Commit extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_commit";
 
-	@Column(name = "date", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_DATE = "date";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_HASH = "hash";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_DIFF_URL = "diff_url";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_MESSAGE = "message";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_AUTHOR_ID = "author_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.C_CN_DATE, nullable = false)
 	private ZonedDateTime date;
 
-	@Column(name = "hash", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.C_CN_HASH, unique = true, nullable = false)
 	private String hash;
 
-	@Column(name = "diff_url", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.C_CN_DIFF_URL, nullable = false)
 	private String diffUrl;
 
-	@Column(name = "message", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.C_CN_MESSAGE, nullable = false)
 	private String message;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = ProjectUser.class, fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "author", nullable = false)
+	@JoinColumn(name = ColumnName.C_CN_AUTHOR_ID, nullable = false)
 	private ProjectUser author;
 
+	/**
+	 * Constructor.
+	 */
 	public Commit() {
 	}
 

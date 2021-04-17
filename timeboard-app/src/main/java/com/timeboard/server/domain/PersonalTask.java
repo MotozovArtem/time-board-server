@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "Task")
 @Table(name = PersonalTask.TABLE_NAME)
 public class PersonalTask extends DomainEntity {
@@ -17,29 +20,84 @@ public class PersonalTask extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_personal_task";
 
-	@Column(name = "done_date")
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_DONE_DATE = "done_date";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_DONE = "done";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_DESCRIPTION = "description";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_NAME = "name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_GROUP_TASK_ID = "group_task_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PT_CN_USER_ID = "user_id";
+	}
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PT_CN_DONE_DATE)
 	private ZonedDateTime doneDate;
 
-	@Column(name = "is_done", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PT_CN_DONE, nullable = false)
 	private Boolean isDone;
 
-	@Column(name = "description")
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PT_CN_DESCRIPTION)
 	private String description;
 
-	@Column(name = "name", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PT_CN_NAME, nullable = false)
 	private String name;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = GroupTask.class,
 			fetch = FetchType.LAZY)
-	@JoinColumn(name = "group_task", referencedColumnName = "id")
+	@JoinColumn(name = ColumnName.PT_CN_GROUP_TASK_ID, referencedColumnName = "id")
 	private GroupTask groupTask;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = User.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "account", nullable = false)
+	@JoinColumn(name = ColumnName.PT_CN_USER_ID, nullable = false)
 	private User user;
 
+	/**
+	 * todo motozov.
+	 */
 	public PersonalTask() {
 	}
 

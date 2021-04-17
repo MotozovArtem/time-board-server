@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectUser")
 @Table(name = ProjectUser.TABLE_NAME)
 public class ProjectUser extends DomainEntity {
@@ -22,22 +25,63 @@ public class ProjectUser extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_project_user";
 
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PU_CN_USER_ID = "user_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PU_CN_JOINING_DATE = "joining_date";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PU_CN_LEAVING_DATE = "leaving_date";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String PU_CN_PROJECT_ID = "project_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "project_user_id", nullable = false)
+	@JoinColumn(name = ColumnName.PU_CN_USER_ID, nullable = false)
 	private User user;
 
-	@Column(name = "joining_date", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PU_CN_JOINING_DATE, nullable = false)
 	private ZonedDateTime joiningDate;
 
-	@Column(name = "leaving_date")
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.PU_CN_LEAVING_DATE)
 	private ZonedDateTime leavingDate;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Project.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "project", nullable = false)
+	@JoinColumn(name = ColumnName.PU_CN_PROJECT_ID, nullable = false)
 	private Project project;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role",
 			joinColumns = @JoinColumn(name = "project_user"),
@@ -45,6 +89,9 @@ public class ProjectUser extends DomainEntity {
 	)
 	private Set<Role> roles;
 
+	/**
+	 * Constructor.
+	 */
 	public ProjectUser() {
 	}
 

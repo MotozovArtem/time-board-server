@@ -1,6 +1,6 @@
 package com.timeboard.server.domain;
 
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectDashboard")
 @Table(name = Project.TABLE_NAME)
 public class Project extends DomainEntity {
@@ -17,19 +20,55 @@ public class Project extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_project_dashboard";
 
-	@Column(name = "project_name", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String P_CN_PROJECT_NAME = "project_name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String P_CN_PROJECT_CODE = "project_code";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String P_CN_DESCRIPTION = "description";
+	}
+
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.P_CN_PROJECT_NAME, unique = true, nullable = false)
 	private String projectName;
 
-	@Column(name = "project_code", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.P_CN_PROJECT_CODE, unique = true, nullable = false)
 	private String projectCode;
 
-	@Column(name = "description")
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.P_CN_DESCRIPTION)
 	private String description;
 
+	/**
+	 * todo motozov.
+	 */
 	@OneToMany(targetEntity = ProjectUser.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "project")
-	private List<ProjectUser> users;
+	@JoinColumn(name = ProjectUser.ColumnName.PU_CN_PROJECT_ID)
+	private Set<ProjectUser> users;
 
+	/**
+	 * Constructor.
+	 */
 	public Project() {
 	}
 
@@ -57,11 +96,11 @@ public class Project extends DomainEntity {
 		this.description = description;
 	}
 
-	public List<ProjectUser> getUsers() {
+	public Set<ProjectUser> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<ProjectUser> users) {
+	public void setUsers(Set<ProjectUser> users) {
 		this.users = users;
 	}
 }

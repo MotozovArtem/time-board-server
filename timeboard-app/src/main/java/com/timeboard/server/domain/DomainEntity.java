@@ -23,35 +23,66 @@ import javax.persistence.Version;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class DomainEntity {
+public abstract class DomainEntity {
 
+	/**
+	 * todo motozov.
+	 */
 	public static class ColumnName {
 
+		/**
+		 * todo motozov.
+		 */
 		public static final String DE_CN_CREATION_TIME = "creation_time";
 
+		/**
+		 * todo motozov.
+		 */
 		public static final String DE_CN_LAST_MODIFIED_TIME = "last_modified_time";
 
+		/**
+		 * todo motozov.
+		 */
 		public static final String DE_CN_TS = "ts";
 	}
 
+	/**
+	 * todo motozov.
+	 */
 	@Id
-	@Column(name = "id", unique = true, nullable = false)
 	@Type(type = "uuid-char")
 	@GeneratedValue
 	private UUID id;
 
+	/**
+	 * todo motozov.
+	 */
 	@ReadOnlyProperty
 	@CreatedDate
 	@Column(name = ColumnName.DE_CN_CREATION_TIME, nullable = false)
 	private ZonedDateTime creationDate;
 
+	/**
+	 * todo motozov.
+	 */
 	@LastModifiedDate
 	@Column(name = ColumnName.DE_CN_LAST_MODIFIED_TIME)
 	private ZonedDateTime lastModifiedDate;
 
+	/**
+	 * todo motozov.
+	 */
 	@Version
 	@Column(name = ColumnName.DE_CN_TS, nullable = false)
 	private Long ts;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
 	public ZonedDateTime getCreationDate() {
 		return creationDate;

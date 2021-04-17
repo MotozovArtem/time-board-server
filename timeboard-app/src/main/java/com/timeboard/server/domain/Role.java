@@ -9,6 +9,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectRole")
 @Table(name = Role.TABLE_NAME)
 public class Role extends DomainEntity {
@@ -18,21 +21,57 @@ public class Role extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_role";
 
-	@Column(name = "name", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String R_CN_NAME = "name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String R_CN_ACCESS_LEVEL = "access_level";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String R_CN_PROJECT_ID = "project_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.R_CN_NAME, unique = true, nullable = false)
 	private String name;
 
-	@Column(name = "access_level", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.R_CN_ACCESS_LEVEL, unique = true, nullable = false)
 	private Integer accessLevel;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Project.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "project_id", nullable = false)
+	@JoinColumn(name = ColumnName.R_CN_PROJECT_ID, nullable = false)
 	private Project project;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<ProjectUser> users;
 
+	/**
+	 * Constructor.
+	 */
 	public Role() {
 	}
 

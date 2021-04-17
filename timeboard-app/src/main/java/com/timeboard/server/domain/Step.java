@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectStep")
 @Table(name = Step.TABLE_NAME)
 public class Step extends DomainEntity {
@@ -16,15 +19,40 @@ public class Step extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_step";
 
-	@Column(name = "name", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String S_CN_NAME = "name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String S_CN_PROJECT_ID = "project_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.S_CN_NAME, unique = true, nullable = false)
 	private String name;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Project.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "project_id", nullable = false)
+	@JoinColumn(name = ColumnName.S_CN_PROJECT_ID, nullable = false)
 	private Project project;
 
+	/**
+	 * Constructor.
+	 */
 	public Step() {
 	}
 

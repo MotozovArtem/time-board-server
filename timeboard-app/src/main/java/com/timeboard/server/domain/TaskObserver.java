@@ -6,6 +6,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectTaskObserver")
 @Table(name = TaskObserver.TABLE_NAME)
 public class TaskObserver extends DomainEntity {
@@ -15,14 +18,39 @@ public class TaskObserver extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_task_observer";
 
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String TO_CN_TASK_ID = "task_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String TO_CN_OBSERVER_ID = "observer_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "task", nullable = false)
+	@JoinColumn(name = ColumnName.TO_CN_TASK_ID, nullable = false)
 	private Task task;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = ProjectUser.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "observer", unique = true, nullable = false)
+	@JoinColumn(name = ColumnName.TO_CN_OBSERVER_ID, unique = true, nullable = false)
 	private ProjectUser observer;
 
+	/**
+	 * Constructor.
+	 */
 	public TaskObserver() {
 	}
 

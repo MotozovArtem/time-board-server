@@ -19,19 +19,52 @@ public class Comment extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_comment";
 
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_AUTHOR_ID = "author_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_COMMENT_TEXT = "comment_text";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String C_CN_TASK_ID = "task_id";
+	}
+
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = ProjectUser.class, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = ColumnName.C_CN_AUTHOR_ID, nullable = false)
 	private ProjectUser author;
 
+	/**
+	 * todo motozov.
+	 */
 	@Column(name = ColumnName.C_CN_COMMENT_TEXT, nullable = false)
 	private String commentText;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Task.class,
 			fetch = FetchType.LAZY,
 			optional = false)
 	@JoinColumn(name = ColumnName.C_CN_TASK_ID, nullable = false)
 	private Task task;
 
+	/**
+	 * Constructor.
+	 */
 	public Comment() {
 	}
 
@@ -57,15 +90,5 @@ public class Comment extends DomainEntity {
 
 	public void setTask(Task task) {
 		this.task = task;
-	}
-
-	public static class ColumnName {
-		public static final String C_CN_ID = "id";
-
-		public static final String C_CN_AUTHOR_ID = "author_id";
-
-		public static final String C_CN_COMMENT_TEXT = "comment_text";
-
-		public static final String C_CN_TASK_ID = "task_id";
 	}
 }

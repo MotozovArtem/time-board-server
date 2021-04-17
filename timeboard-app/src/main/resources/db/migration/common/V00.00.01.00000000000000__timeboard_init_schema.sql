@@ -1,258 +1,229 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- CREATE TABLE timeboard_group_task (
---     id VARCHAR(36) NOT NULL,
---     name VARCHAR(100) NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_user (
---     id VARCHAR(36) NOT NULL,
---     login VARCHAR(256) NOT NULL,
---     password VARCHAR(100) NOT NULL,
---     email VARCHAR(256) NOT NULL,
---     first_name VARCHAR(256) NOT NULL,
---     second_name VARCHAR(256) NOT NULL,
---     creation_date DATE NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     icon_url TEXT NULL,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_user(id, login, password, email, first_name, second_name, creation_date)
--- VALUES ('bb951eda-a219-4f39-ac90-6af6c0a6af78', 'admin', 'admin', 'motozov.a.v@gmail.com', 'Admin', 'Admin', NOW());
---
--- CREATE TABLE timeboard_project_schema (
---     id VARCHAR(36) NOT NULL,
---     user VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_project_schema__account"
---             REFERENCES timeboard_user
---             ON DELETE RESTRICT,
---     user_in_project VARCHAR(36) NULL,
---     project_schema VARCHAR(100) NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_project_schema(id, user, user_in_project, project_schema)
--- VALUES ('f98e0fec-9230-4937-8f39-178f50c04666', 'bb951eda-a219-4f39-ac90-6af6c0a6af78',
---         'dccb81a8-c935-4d5e-be81-a522faf692f3', 'project_test');
---
--- CREATE TABLE timeboard_personal_task (
---     id VARCHAR(36) NOT NULL,
---     creation_date DATE NOT NULL,
---     done_date DATE NULL,
---     is_done BOOLEAN NOT NULL DEFAULT FALSE,
---     description TEXT NULL,
---     name VARCHAR(100) NOT NULL,
---     group_task VARCHAR(36) NULL
---         CONSTRAINT "FK_task__group"
---             REFERENCES timeboard_group_task
---             ON DELETE RESTRICT,
---     user VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__account"
---             REFERENCES timeboard_user
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_personal_task_attachment (
---     id VARCHAR(36) NOT NULL,
---     attachment_name VARCHAR(256) NOT NULL,
---     url VARCHAR(256) NOT NULL,
---     personal_task VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task_attachment__task"
---             REFERENCES timeboard_personal_task
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_project_dashboard (
---     id VARCHAR(36) NOT NULL,
---     project_name VARCHAR(256) NOT NULL,
---     project_code VARCHAR(10) NOT NULL UNIQUE,
---     creation_date DATE NOT NULL,
---     description TEXT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_project_dashboard(id, project_name, project_code, creation_date, description)
--- VALUES ('d17666d0-7c75-4da6-9bd3-e187ed482257', 'project_test', 'PT', NOW(), 'project_test');
---
--- CREATE TABLE timeboard_project_user (
---     id VARCHAR(36) NOT NULL,
---     project_schema VARCHAR(36) NOT NULL,
---     joining_date DATE NOT NULL,
---     leaving_date DATE NULL,
---     project VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_project_user__project_dashboard"
---             REFERENCES timeboard_project_dashboard
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_project_user(id, project_schema, joining_date, leaving_date, project)
--- VALUES (uuid_generate_v4(), 'f98e0fec-9230-4937-8f39-178f50c04666', NOW(), NULL,
---         'd17666d0-7c75-4da6-9bd3-e187ed482257');
---
--- CREATE TABLE timeboard_role (
---     id VARCHAR(36) NOT NULL,
---     name VARCHAR(100) NOT NULL UNIQUE,
---     access_level INTEGER NOT NULL UNIQUE,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_role(id, name, access_level)
--- VALUES (uuid_generate_v4(), 'Admin', 100),
---        (uuid_generate_v4(), 'Moderator', 90),
---        (uuid_generate_v4(), 'Viewer', 80),
---        (uuid_generate_v4(), 'Guest', 0);
---
--- CREATE TABLE timeboard_user_role (
---     id VARCHAR(36) NOT NULL,
---     project_user VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_user_role__project_user"
---             REFERENCES timeboard_project_user
---             ON DELETE RESTRICT,
---     role VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_user_role__role"
---             REFERENCES timeboard_role
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_step (
---     id VARCHAR(36) NOT NULL,
---     name VARCHAR(50) NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- INSERT INTO timeboard_step(id, name)
--- VALUES (uuid_generate_v4(), 'TO DO'),
---        (uuid_generate_v4(), 'IN PROGRESS'),
---        (uuid_generate_v4(), 'DONE');
---
---
--- CREATE TABLE timeboard_task (
---     id VARCHAR(36) NOT NULL,
---     number INTEGER NOT NULL,
---     full_code VARCHAR(50) NOT NULL UNIQUE,
---     creation_date DATE NOT NULL,
---     done_date DATE NULL,
---     last_modified DATE NOT NULL,
---     description TEXT NULL,
---     name VARCHAR(256) NOT NULL,
---     project VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__project_dashboard"
---             REFERENCES timeboard_project_dashboard
---             ON DELETE RESTRICT,
---     step VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__step"
---             REFERENCES timeboard_step
---             ON DELETE RESTRICT,
---     group_task VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__group_task"
---             REFERENCES timeboard_group_task
---             ON DELETE RESTRICT,
---     executor VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__project_user_executor"
---             REFERENCES timeboard_project_user
---             ON DELETE RESTRICT,
---     reporter VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task__project_user_reporter"
---             REFERENCES timeboard_project_user
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_task_observer (
---     id VARCHAR(36) NOT NULL,
---     task VARCHAR(36) NULL
---         CONSTRAINT "FK_task_observer__task"
---             REFERENCES timeboard_task
---             ON DELETE RESTRICT,
---     observer VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_task_observer__project_user"
---             REFERENCES timeboard_project_user
---             ON DELETE RESTRICT,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_comment (
---     id VARCHAR(36) NOT NULL,
---     creation_date DATE NOT NULL,
---     last_modified_date DATE NOT NULL,
---     author VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_commit__project_user"
---             REFERENCES timeboard_project_user
---             ON DELETE SET NULL,
---     task VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_commit__task"
---             REFERENCES timeboard_task
---             ON DELETE SET NULL,
---     comment_text TEXT NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_task_attachment (
---     id VARCHAR(36) NOT NULL,
---     personalTask VARCHAR(36) NULL
---         CONSTRAINT "FK_task_attachment__task"
---             REFERENCES timeboard_task
---             ON DELETE RESTRICT,
---     attachment_name VARCHAR(256) NOT NULL,
---     url VARCHAR(256) NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_comment_attachment (
---     id VARCHAR(36) NOT NULL,
---     comment VARCHAR(36) NULL
---         CONSTRAINT "FK_task_attachment__comment"
---             REFERENCES timeboard_comment
---             ON DELETE SET NULL,
---     attachment_name VARCHAR(256) NOT NULL,
---     url VARCHAR(256) NOT NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_commit (
---     id VARCHAR(36) NOT NULL,
---     date DATE NOT NULL,
---     hash VARCHAR(16) NOT NULL,
---     diff_url VARCHAR(256) NOT NULL,
---     message TEXT NOT NULL,
---     author VARCHAR(36) NOT NULL
---         CONSTRAINT "FK_commit__project_user"
---             REFERENCES timeboard_project_user
---             ON DELETE SET NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
---
--- CREATE TABLE timeboard_task_commit (
---     id VARCHAR(36) NOT NULL,
---     personalTask VARCHAR(36) NULL
---         CONSTRAINT "FK_task_commit__task"
---             REFERENCES timeboard_task
---             ON DELETE RESTRICT,
---     commit VARCHAR(36) NULL
---         CONSTRAINT "FK_task_commit__commit"
---             REFERENCES timeboard_commit
---             ON DELETE SET NULL,
---     version INTEGER NOT NULL DEFAULT 0,
---     PRIMARY KEY (id)
---     );
+CREATE TABLE timeboard_group_task (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_group_task_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_group_task_name_ukey UNIQUE (name)
+    );
+
+CREATE TABLE timeboard_project_dashboard (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    description VARCHAR(255) NULL,
+    project_code VARCHAR(255) NOT NULL,
+    project_name VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_project_dashboard_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_project_dashboard_project_name_ukey UNIQUE (project_name),
+    CONSTRAINT timeboard_project_dashboard_project_code_ukey UNIQUE (project_code)
+    );
+
+CREATE TABLE timeboard_user (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    icon_url VARCHAR(255) NULL,
+    login VARCHAR(255) NOT NULL,
+    "password" VARCHAR(255) NOT NULL,
+    second_name VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_user_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_user_email_ukey UNIQUE (email),
+    CONSTRAINT timeboard_user_login_ukey UNIQUE (login)
+    );
+
+CREATE TABLE timeboard_personal_task (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    description VARCHAR(255) NULL,
+    done_date TIMESTAMP NULL,
+    done BOOL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    group_task_id VARCHAR(255) NULL,
+    user_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_personal_task_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_personal_task_group_task_id_fkey FOREIGN KEY (group_task_id) REFERENCES timeboard_group_task (id),
+    CONSTRAINT timeboard_personal_task_user_id_fkey FOREIGN KEY (user_id) REFERENCES timeboard_user (id)
+    );
+
+CREATE TABLE timeboard_personal_task_attachment (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    attachment_name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    personal_task_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_personal_task_attachment_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_personal_task_attachment_url_ukey UNIQUE (url),
+    CONSTRAINT timeboard_personal_task_attachment_personal_task_id_fkey
+        FOREIGN KEY (personal_task_id) REFERENCES timeboard_personal_task (id)
+    );
+
+CREATE TABLE timeboard_project_user (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    joining_date TIMESTAMP NOT NULL,
+    leaving_date TIMESTAMP NULL,
+    project_id VARCHAR(255) NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_project_user_pkey
+        PRIMARY KEY (id),
+    CONSTRAINT timeboard_project_user_user_id_fkey
+        FOREIGN KEY (user_id) REFERENCES timeboard_user (id),
+    CONSTRAINT timeboard_project_user_project_id_fkey
+        FOREIGN KEY (project_id) REFERENCES timeboard_project_dashboard (id)
+    );
+
+CREATE TABLE timeboard_role (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    access_level INT4 NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    project_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_role_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_role_access_level_ukey UNIQUE (access_level),
+    CONSTRAINT timeboard_role_name_ukey UNIQUE (name),
+    CONSTRAINT timeboard_role_project_id_fkey FOREIGN KEY (project_id) REFERENCES timeboard_project_dashboard (id)
+    );
+
+CREATE TABLE timeboard_step (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    project_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_step_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_step_name_ukey UNIQUE (name),
+    CONSTRAINT timeboard_step_project_id_fkey FOREIGN KEY (project_id) REFERENCES timeboard_project_dashboard (id)
+    );
+
+CREATE TABLE timeboard_task (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    done_date TIMESTAMP NULL,
+    full_code VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "number" INT4 NOT NULL,
+    executor_id VARCHAR(255) NOT NULL,
+    group_task_id VARCHAR(255) NOT NULL,
+    project_id VARCHAR(255) NOT NULL,
+    reported_id VARCHAR(255) NOT NULL,
+    step_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_task_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_task_full_code_ukey UNIQUE (full_code),
+    CONSTRAINT timeboard_task_number_ukey UNIQUE (number),
+    CONSTRAINT timeboard_task_executor_id_fkey FOREIGN KEY (executor_id) REFERENCES timeboard_project_user (id),
+    CONSTRAINT timeboard_task_group_task_id_fkey FOREIGN KEY (group_task_id) REFERENCES timeboard_group_task (id),
+    CONSTRAINT timeboard_task_step_id_fkey FOREIGN KEY (step_id) REFERENCES timeboard_step (id),
+    CONSTRAINT timeboard_task_project_id_fkey FOREIGN KEY (project_id) REFERENCES timeboard_project_dashboard (id),
+    CONSTRAINT timeboard_task_reported_id_fkey FOREIGN KEY (reported_id) REFERENCES timeboard_project_user (id)
+    );
+
+
+CREATE TABLE timeboard_task_attachment (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    attachment_name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    task_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_task_attachment_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_task_attachment_url_ukey UNIQUE (url),
+    CONSTRAINT timeboard_task_attachment_task_id_fkey FOREIGN KEY (task_id) REFERENCES timeboard_task (id)
+    );
+
+CREATE TABLE timeboard_task_observer (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    observer_id VARCHAR(255) NOT NULL,
+    task_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_task_observer_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_task_observer_observer_id_ukey UNIQUE (observer_id),
+    CONSTRAINT timeboard_task_observer_observer_id_fkey FOREIGN KEY (observer_id) REFERENCES timeboard_project_user (id),
+    CONSTRAINT timeboard_task_observer_task_id_fkey FOREIGN KEY (task_id) REFERENCES timeboard_task (id)
+    );
+
+CREATE TABLE user_role (
+    project_user VARCHAR(255) NOT NULL,
+    "role" VARCHAR(255) NOT NULL,
+    CONSTRAINT user_role_pkey PRIMARY KEY (project_user, role),
+    CONSTRAINT user_role_role_fkey FOREIGN KEY (role) REFERENCES timeboard_role (id),
+    CONSTRAINT user_role_project_user_fkey FOREIGN KEY (project_user) REFERENCES timeboard_project_user (id)
+    );
+
+CREATE TABLE timeboard_comment (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    comment_text VARCHAR(255) NOT NULL,
+    author_id VARCHAR(255) NOT NULL,
+    task_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_comment_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_comment_author_id_fkey FOREIGN KEY (author_id) REFERENCES timeboard_project_user (id),
+    CONSTRAINT timeboard_comment_task_id_fkey FOREIGN KEY (task_id) REFERENCES timeboard_task (id)
+    );
+
+
+CREATE TABLE timeboard_comment_attachment (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    attachment_name VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    comment_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_comment_attachment_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_comment_attachment_url_ukey UNIQUE (url),
+    CONSTRAINT timeboard_comment_attachment_commit_id_fkey FOREIGN KEY (comment_id) REFERENCES timeboard_comment (id)
+    );
+
+
+CREATE TABLE timeboard_commit (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    "date" TIMESTAMP NOT NULL,
+    diff_url VARCHAR(255) NOT NULL,
+    hash VARCHAR(255) NOT NULL,
+    message VARCHAR(255) NOT NULL,
+    author_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_commit_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_commit_hash_ukey UNIQUE (hash),
+    CONSTRAINT timeboard_commit_author_id_fkey FOREIGN KEY (author_id) REFERENCES timeboard_project_user (id)
+    );
+
+
+CREATE TABLE timeboard_task_commit (
+    id VARCHAR(255) NOT NULL,
+    creation_time TIMESTAMP NOT NULL,
+    last_modified_time TIMESTAMP NULL,
+    ts BIGINT NOT NULL,
+    commit_id VARCHAR(255) NOT NULL,
+    task_id VARCHAR(255) NOT NULL,
+    CONSTRAINT timeboard_task_commit_pkey PRIMARY KEY (id),
+    CONSTRAINT timeboard_task_commit_commit_id_fkey FOREIGN KEY (commit_id) REFERENCES timeboard_commit (id),
+    CONSTRAINT timeboard_task_commit_task_id_fkey FOREIGN KEY (task_id) REFERENCES timeboard_task (id)
+    );

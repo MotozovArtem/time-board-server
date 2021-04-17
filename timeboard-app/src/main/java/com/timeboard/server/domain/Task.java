@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * todo motozov.
+ */
 @Entity(name = "ProjectTask")
 @Table(name = Task.TABLE_NAME)
 public class Task extends DomainEntity {
@@ -17,66 +20,140 @@ public class Task extends DomainEntity {
 	 */
 	public static final String TABLE_NAME = "timeboard_task";
 
+	/**
+	 * todo motozov.
+	 */
 	public static class ColumnName {
-		public static final String T_CN_ID = "id";
-		public static final String T_CN_NUMBER = "id";
-		public static final String T_CN_FULL_CODE = "id";
-		public static final String T_CN_CREATION_DATE = "id";
-		public static final String T_CN_DONE_DATE = "id";
-		public static final String T_CN_LAST_MODIFIED = "id";
-		public static final String T_CN_DESCRIPTION = "id";
-		public static final String T_CN_NAME = "id";
-		public static final String T_CN_PROJECT = "id";
-		public static final String T_CN_STEP = "id";
-		public static final String T_CN_GROUP_TASK = "id";
-		public static final String T_CN_REPORTER = "id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_NUMBER = "number";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_FULL_CODE = "full_code";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_DONE_DATE = "done_date";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_DESCRIPTION = "description";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_NAME = "name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_PROJECT_ID = "project_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_STEP_ID = "step_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_GROUP_TASK_ID = "group_task_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_EXECUTOR_ID = "executor_id";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String T_CN_REPORTER_ID = "reported_id";
 	}
 
-	@Column(name = "number", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.T_CN_NUMBER, unique = true, nullable = false)
 	private Integer number;
 
-	@Column(name = "full_code", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.T_CN_FULL_CODE, unique = true, nullable = false)
 	private String fullCode;
 
-	@Column(name = "done_date")
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.T_CN_DONE_DATE)
 	private ZonedDateTime doneDate;
 
-	@Column(name = "description", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.T_CN_DESCRIPTION, nullable = false)
 	private String description;
 
-	@Column(name = "name", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.T_CN_NAME, nullable = false)
 	private String name;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Project.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "project", nullable = false)
+	@JoinColumn(name = ColumnName.T_CN_PROJECT_ID, nullable = false)
 	private Project project;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = Step.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "step", nullable = false)
+	@JoinColumn(name = ColumnName.T_CN_STEP_ID, nullable = false)
 	private Step step;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = GroupTask.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "group_task")
+	@JoinColumn(name = ColumnName.T_CN_GROUP_TASK_ID)
 	private GroupTask groupTask;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = ProjectUser.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "executor")
+	@JoinColumn(name = ColumnName.T_CN_EXECUTOR_ID)
 	private ProjectUser executor;
 
+	/**
+	 * todo motozov.
+	 */
 	@ManyToOne(targetEntity = ProjectUser.class,
 			fetch = FetchType.LAZY,
 			optional = false)
-	@JoinColumn(name = "reporter", nullable = false)
+	@JoinColumn(name = ColumnName.T_CN_REPORTER_ID, nullable = false)
 	private ProjectUser reporter;
 
+	/**
+	 * Constructor.
+	 */
 	public Task() {
 	}
 

@@ -4,33 +4,93 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity(name = "Account")
+/**
+ * todo motozov.
+ */
+@Entity(name = "User")
 @Table(name = User.TABLE_NAME)
 public class User extends DomainEntity {
 
 	/**
 	 * todo motozov.
 	 */
-	public static final String TABLE_NAME = "timeboard_account";
+	public static final String TABLE_NAME = "timeboard_user";
 
-	@Column(name = "login", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	public static class ColumnName {
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_LOGIN = "login";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_PASSWORD = "password";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_EMAIL = "email";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_FIRST_NAME = "first_name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_SECOND_NAME = "second_name";
+
+		/**
+		 * todo motozov.
+		 */
+		public static final String U_CN_ICON_URL = "icon_url";
+	}
+
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_LOGIN, unique = true, nullable = false)
 	private String login;
 
-	@Column(name = "password", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_PASSWORD, nullable = false)
 	private String password;
 
-	@Column(name = "email", unique = true, nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_EMAIL, unique = true, nullable = false)
 	private String email;
 
-	@Column(name = "first_name", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_FIRST_NAME, nullable = false)
 	private String firstName;
 
-	@Column(name = "second_name", nullable = false)
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_SECOND_NAME, nullable = false)
 	private String secondName;
 
-	@Column(name = "icon_url")
+	/**
+	 * todo motozov.
+	 */
+	@Column(name = ColumnName.U_CN_ICON_URL)
 	private String iconUrl;
 
+	/**
+	 * Constructor.
+	 */
 	public User() {
 	}
 
