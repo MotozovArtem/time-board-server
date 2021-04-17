@@ -23,6 +23,7 @@
 		<module>timeboard-build-resources</module>
 		<module>timeboard-app-docker</module>
 		<module>timeboard-security</module>
+		<module>timeboard-app-test</module>
 	</modules>
 
 	<properties>
