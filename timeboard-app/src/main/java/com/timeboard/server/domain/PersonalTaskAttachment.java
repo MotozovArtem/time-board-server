@@ -1,27 +1,20 @@
-package com.timeboard.server.domain.accounts;
+package com.timeboard.server.domain;
 
-import org.hibernate.annotations.Type;
-
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity(name = "TaskAttachment")
-@Table(name = "personal_task_attachment")
-public class PersonalTaskAttachment {
+@Table(name = PersonalTaskAttachment.TABLE_NAME)
+public class PersonalTaskAttachment extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_personal_task_attachment";
 
 	@Column(name = "attachment_name", nullable = false)
 	private String attachmentName;
@@ -35,19 +28,7 @@ public class PersonalTaskAttachment {
 	@JoinColumn(name = "task", nullable = false, referencedColumnName = "id")
 	private PersonalTask personalTask;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
 	public PersonalTaskAttachment() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getAttachmentName() {
@@ -72,13 +53,5 @@ public class PersonalTaskAttachment {
 
 	public void setTask(PersonalTask personalTask) {
 		this.personalTask = personalTask;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
 	}
 }

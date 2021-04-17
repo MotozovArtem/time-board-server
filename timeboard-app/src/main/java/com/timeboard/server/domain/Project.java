@@ -1,38 +1,27 @@
-package com.timeboard.server.domain.projects;
+package com.timeboard.server.domain;
 
-import org.hibernate.annotations.Type;
-
-import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity(name = "ProjectDashboard")
-@Table(name = "project_dashboard")
-public class ProjectDashboard {
+@Table(name = Project.TABLE_NAME)
+public class Project extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_project_dashboard";
 
 	@Column(name = "project_name", unique = true, nullable = false)
 	private String projectName;
 
 	@Column(name = "project_code", unique = true, nullable = false)
 	private String projectCode;
-
-	@Column(name = "creation_date", nullable = false)
-	private ZonedDateTime creation_date;
 
 	@Column(name = "description")
 	private String description;
@@ -41,19 +30,7 @@ public class ProjectDashboard {
 	@JoinColumn(name = "project")
 	private List<ProjectUser> users;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
-	public ProjectDashboard() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
+	public Project() {
 	}
 
 	public String getProjectName() {
@@ -70,14 +47,6 @@ public class ProjectDashboard {
 
 	public void setProjectCode(String projectCode) {
 		this.projectCode = projectCode;
-	}
-
-	public ZonedDateTime getCreation_date() {
-		return creation_date;
-	}
-
-	public void setCreation_date(ZonedDateTime creation_date) {
-		this.creation_date = creation_date;
 	}
 
 	public String getDescription() {

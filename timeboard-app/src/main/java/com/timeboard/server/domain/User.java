@@ -1,30 +1,17 @@
-package com.timeboard.server.domain.accounts;
+package com.timeboard.server.domain;
 
-import org.hibernate.annotations.Type;
-
-import java.time.ZonedDateTime;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity(name = "Account")
-@Table(name = Account.TABLE_NAME)
-public class Account {
+@Table(name = User.TABLE_NAME)
+public class User extends DomainEntity {
 
 	/**
-	 * todo rienel.
+	 * todo motozov.
 	 */
-	public static final String TABLE_NAME = "account";
-
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	public static final String TABLE_NAME = "timeboard_account";
 
 	@Column(name = "login", unique = true, nullable = false)
 	private String login;
@@ -41,25 +28,10 @@ public class Account {
 	@Column(name = "second_name", nullable = false)
 	private String secondName;
 
-	@Column(name = "creation_date", nullable = false)
-	private ZonedDateTime creationDate;
-
 	@Column(name = "icon_url")
 	private String iconUrl;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
-	public Account() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
+	public User() {
 	}
 
 	public String getLogin() {
@@ -102,27 +74,11 @@ public class Account {
 		this.secondName = secondName;
 	}
 
-	public ZonedDateTime getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(ZonedDateTime creationDate) {
-		this.creationDate = creationDate;
-	}
-
 	public String getIconUrl() {
 		return iconUrl;
 	}
 
 	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
 	}
 }

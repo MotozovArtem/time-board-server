@@ -1,27 +1,20 @@
-package com.timeboard.server.domain.projects;
+package com.timeboard.server.domain;
 
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
-
-import org.hibernate.annotations.Type;
 
 @Entity(name = "ProjectTaskAttachment")
-@Table(name = "task_attachment")
-public class TaskAttachment {
+@Table(name = TaskAttachment.TABLE_NAME)
+public class TaskAttachment extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_task_attachment";
 
 	@ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "task", nullable = false)
@@ -33,19 +26,7 @@ public class TaskAttachment {
 	@Column(name = "url", unique = true, nullable = false)
 	private String url;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
 	public TaskAttachment() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public Task getTask() {
@@ -70,13 +51,5 @@ public class TaskAttachment {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
 	}
 }

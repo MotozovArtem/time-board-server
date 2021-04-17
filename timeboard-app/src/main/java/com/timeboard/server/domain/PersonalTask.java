@@ -1,31 +1,21 @@
-package com.timeboard.server.domain.accounts;
-
-import org.hibernate.annotations.Type;
+package com.timeboard.server.domain;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity(name = "Task")
-@Table(name = "personal_task")
-public class PersonalTask {
+@Table(name = PersonalTask.TABLE_NAME)
+public class PersonalTask extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
-
-	@Column(name = "creation_date", nullable = false)
-	private ZonedDateTime creationDate;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_personal_task";
 
 	@Column(name = "done_date")
 	private ZonedDateTime doneDate;
@@ -44,33 +34,13 @@ public class PersonalTask {
 	@JoinColumn(name = "group_task", referencedColumnName = "id")
 	private GroupTask groupTask;
 
-	@ManyToOne(targetEntity = Account.class,
+	@ManyToOne(targetEntity = User.class,
 			fetch = FetchType.LAZY,
 			optional = false)
 	@JoinColumn(name = "account", nullable = false)
-	private Account account;
-
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
+	private User user;
 
 	public PersonalTask() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public ZonedDateTime getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(ZonedDateTime creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public ZonedDateTime getDoneDate() {
@@ -113,19 +83,11 @@ public class PersonalTask {
 		this.groupTask = groupTask;
 	}
 
-	public Account getAccount() {
-		return account;
+	public User getAccount() {
+		return user;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
+	public void setAccount(User user) {
+		this.user = user;
 	}
 }

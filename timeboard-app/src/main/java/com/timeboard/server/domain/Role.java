@@ -1,27 +1,22 @@
-package com.timeboard.server.domain.projects;
-
-import org.hibernate.annotations.Type;
+package com.timeboard.server.domain;
 
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity(name = "ProjectRole")
-@Table(name = "role")
-public class Role {
+@Table(name = Role.TABLE_NAME)
+public class Role extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_role";
 
 	@Column(name = "name", unique = true, nullable = false)
 	private String name;
@@ -29,22 +24,16 @@ public class Role {
 	@Column(name = "access_level", unique = true, nullable = false)
 	private Integer accessLevel;
 
+	@ManyToOne(targetEntity = Project.class,
+			fetch = FetchType.LAZY,
+			optional = false)
+	@JoinColumn(name = "project_id", nullable = false)
+	private Project project;
+
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<ProjectUser> users;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
 	public Role() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -69,5 +58,13 @@ public class Role {
 
 	public void setUsers(Set<ProjectUser> users) {
 		this.users = users;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 }

@@ -1,28 +1,21 @@
-package com.timeboard.server.domain.projects;
+package com.timeboard.server.domain;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
-
-import org.hibernate.annotations.Type;
 
 @Entity(name = "ProjectCommit")
-@Table(name = "commit")
-public class Commit {
+@Table(name = Commit.TABLE_NAME)
+public class Commit extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_commit";
 
 	@Column(name = "date", nullable = false)
 	private ZonedDateTime date;
@@ -40,19 +33,7 @@ public class Commit {
 	@JoinColumn(name = "author", nullable = false)
 	private ProjectUser author;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
 	public Commit() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public ZonedDateTime getDate() {
@@ -93,13 +74,5 @@ public class Commit {
 
 	public void setAuthor(ProjectUser author) {
 		this.author = author;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
 	}
 }

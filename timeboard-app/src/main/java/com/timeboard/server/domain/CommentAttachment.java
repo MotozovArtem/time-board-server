@@ -1,27 +1,20 @@
-package com.timeboard.server.domain.projects;
+package com.timeboard.server.domain;
 
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
-
-import org.hibernate.annotations.Type;
 
 @Entity(name = "ProjectCommentAttachment")
-@Table(name = "comment_attachment")
-public class CommentAttachment {
+@Table(name = CommentAttachment.TABLE_NAME)
+public class CommentAttachment extends DomainEntity {
 
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	@Type(type = "uuid-char")
-	@GeneratedValue
-	private UUID id;
+	/**
+	 * todo motozov.
+	 */
+	public static final String TABLE_NAME = "timeboard_comment_attachment";
 
 	@ManyToOne(targetEntity = Comment.class,
 			fetch = FetchType.LAZY,
@@ -35,19 +28,7 @@ public class CommentAttachment {
 	@Column(name = "url", unique = true, nullable = false)
 	private String url;
 
-	@Version
-	@Column(name = "ts", nullable = false)
-	private Long ts;
-
 	public CommentAttachment() {
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
 	}
 
 	public Comment getComment() {
@@ -72,14 +53,6 @@ public class CommentAttachment {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Long getTs() {
-		return ts;
-	}
-
-	public void setTs(Long ts) {
-		this.ts = ts;
 	}
 }
 
