@@ -6,21 +6,21 @@
 			<level>DEBUG</level>
 		</filter>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern>%date{"HH:mm:ss,SSS 'UTC'", UTC} %-5level [%thread] %logger{5} %msg%n</Pattern>
+			<Pattern>%date{"HH:mm:ss,SSS 'UTC'", UTC} %-5level [%thread] %logger %msg%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${log_dir}/trace.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<Pattern>%date{"HH:mm:ss,SSS 'UTC'", UTC} %-5level [%thread] %logger{5} %msg%n</Pattern>
+			<Pattern>%date{"HH:mm:ss,SSS 'UTC'", UTC} %-5level [%thread] %logger %msg%n</Pattern>
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${log_dir}/trace.log.%i</fileNamePattern>
+			<fileNamePattern>${log_dir}/trace%i.log</fileNamePattern>
 			<minIndex>1</minIndex>
-			<maxIndex>5</maxIndex>
+			<maxIndex>10</maxIndex>
 		</rollingPolicy>
 		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<maxFileSize>4MB</maxFileSize>
+			<maxFileSize>10MB</maxFileSize>
 		</triggeringPolicy>
 	</appender>
 	<root level="INFO">
