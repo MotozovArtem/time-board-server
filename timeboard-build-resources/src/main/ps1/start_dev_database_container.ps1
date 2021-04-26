@@ -1,0 +1,1 @@
+docker run --rm -e POSTGRES_USER=timeboard -e POSTGRES_PASSWORD=timeboard_password -e POSTGRES_DATABASE=timeboard postgres:10
